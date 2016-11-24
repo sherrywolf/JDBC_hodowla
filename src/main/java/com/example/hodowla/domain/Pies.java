@@ -12,7 +12,7 @@ public class Pies {
         super();
     }
 
-    public Pies(String imie, int rok, String dieta, int rasa_id) {
+    public Pies(String imie, int rok, String dieta) {
         super();
 
         this.pies_id = pies_id;

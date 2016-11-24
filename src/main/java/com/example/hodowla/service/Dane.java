@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.example.hodowla.domain.Pies;
 import com.example.hodowla.domain.Rasa;
-import org.hsqldb.Statement;
 
 public class Dane {
 
