@@ -106,7 +106,6 @@ public class DaneTest {
 
         dane.clearPies();
 
-        List<Pies> AllPies = dane.getAllPies();
         int piesdb  = dane.getAllPies().size();
 
         assertEquals(0,piesdb);
@@ -124,7 +123,6 @@ public class DaneTest {
 
         dane.clearRasa();
 
-        List<Rasa> AllRasa = dane.getAllRasa();
         int rasadb  = dane.getAllRasa().size();
 
         assertEquals(0,rasadb);
@@ -135,6 +133,63 @@ public class DaneTest {
 
     }
 
-    
+    @Test
+    public void checkGetAllPies(){
+
+        System.out.println("********** TEST SELECT **********\n");
+
+        dane.clearPies();
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Pies pies = new Pies(IMIE_1,ROK_1,DIETA_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+
+        assertEquals(1,dane.addPies(1,pies));
+
+        int piesdb  = dane.getAllPies().size();
+
+        assertEquals(1,piesdb);
+
+        System.out.println("Select tabeli nastapil pomyslnie.");
+
+        System.out.println("****** KONIEC TESTU SELECT ******\n");
+
+    }
+
+    @Test
+    public void checkGetAllRasa(){
+
+        System.out.println("********** TEST SELECT **********\n");
+
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Rasa rasa2 = new Rasa(NAME_2,OPIS_2);
+
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addRasa(rasa2));
+
+        int rasadb  = dane.getAllRasa().size();
+
+        assertEquals(2,rasadb);
+
+        System.out.println("Select tabeli nastapil pomyslnie.");
+
+        System.out.println("****** KONIEC TESTU SELECT ******\n");
+
+    }
+
+    @Test
+    public void checkDelRasa(){
+
+        System.out.println("********** TEST DELETE **********\n");
+
+        dane.clearPies();
+        dane.clearRasa();
+
+
+    }
 
 }
