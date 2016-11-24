@@ -8,7 +8,7 @@ public class Rasa {
 
     public Rasa() { super(); }
 
-    public Rasa(int rasa_id, String nazwa, String opis) {
+    public Rasa(String nazwa, String opis) {
         super();
 
         this.rasa_id = rasa_id;
