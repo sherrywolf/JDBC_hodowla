@@ -224,6 +224,9 @@ public class DaneTest {
         List<Rasa> AllRasa = dane.getAllRasa();
         Rasa rasadb = AllRasa.get(dane.getAllRasa().size()-1);
         assertEquals(1, dane.deleteRasa(rasadb.getrasa_id()));
+
+		assertEquals(0, dane.deleteRasa(rasadb.getrasa_id()));
+
         System.out.println("Rasa o id: " + rasadb.getrasa_id() + " i nazwie: " + rasadb.getnazwa() + " zostala usunieta.");
         System.out.println("****** KONIEC TESTU DELETE ******\n");
     }
@@ -245,6 +248,9 @@ public class DaneTest {
         List<Pies> AllPies = dane.getAllPies();
         Pies piesdb = AllPies.get(dane.getAllPies().size()-1);
         assertEquals(1, dane.deletePies(piesdb.getpies_id()));
+
+		assertEquals(0,dane.deletePies(piesdb.getpies_id()));
+
         System.out.println("Pies o id: " + piesdb.getpies_id() + " i nazwie: " + piesdb.getimie() + " zostal usuniety.");
         System.out.println("****** KONIEC TESTU DELETE ******\n");
     }
@@ -268,6 +274,7 @@ public class DaneTest {
         int c = dane.getAllPies_idRasa(piesdb.getrasa_id()).size();
 
         assertEquals(c, dane.deletePiesFromRasa(piesdb.getrasa_id()));
+		assertEquals(0,dane.getAllPies_idRasa(piesdb.getrasa_id()).size());
         System.out.println("Psy o rasa_id: " + piesdb.getrasa_id() + " zostaly usuniete" );
         System.out.println("****** KONIEC TESTU DELETE ******\n");
     }

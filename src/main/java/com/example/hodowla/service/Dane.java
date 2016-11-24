@@ -90,11 +90,11 @@ public class Dane {
             getAllPiesStmt = connection
                     .prepareStatement("SELECT id, nazwa, rok_ur, dieta, rasa_id FROM Pies");
             getAllPies_idRasaStmt = connection
-                    .prepareStatement("SELECT * FROM Pies JOIN Rasa ON (Pies.rasa_id = Rasa.id) WHERE Rasa.id = ?");
+                    .prepareStatement("SELECT * FROM Pies WHERE rasa_id = ?");
             deletePiesStmt =  connection
                     .prepareStatement("DELETE FROM Pies WHERE id = ?");
             updatePiesStmt = connection
-                    .prepareStatement("UPDATE Pies SET name=?, data_ur=?, dieta=?, rasa_id=? WHERE id =?");
+                    .prepareStatement("UPDATE Pies SET nazwa=?, rok_ur=?, dieta=?, rasa_id=? WHERE id =?");
 
             deletePiesFromRasaStmt = connection
                     .prepareStatement("DELETE FROM Pies WHERE rasa_id = ?");
