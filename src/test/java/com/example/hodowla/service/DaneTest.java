@@ -189,7 +189,58 @@ public class DaneTest {
         dane.clearPies();
         dane.clearRasa();
 
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Rasa rasa2 = new Rasa(NAME_2,OPIS_2);
 
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addRasa(rasa2));
+
+        List<Rasa> AllRasa = dane.getAllRasa();
+        Rasa rasadb = AllRasa.get(dane.getAllRasa().size()-1);
+        assertEquals(1, dane.deleteRasa(rasadb.getrasa_id()));
+        System.out.println("Rasa o id: " + rasadb.getrasa_id() + " i nazwie: " + rasadb.getnazwa() + " zostala usunieta.");
+        System.out.println("****** KONIEC TESTU DELETE ******\n");
+    }
+
+    @Test
+    public void checkDelPies(){
+
+        System.out.println("********** TEST DELETE **********\n");
+
+        dane.clearPies();
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Pies pies = new Pies(IMIE_1,ROK_1,DIETA_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addPies(1,pies));
+
+        List<Pies> AllPies = dane.getAllPies();
+        Pies piesdb = AllPies.get(dane.getAllPies().size());
+        assertEquals(1, dane.deletePies(piesdb.getpies_id()));
+        System.out.println("Pies o id: " + piesdb.getpies_id() + " i nazwie: " + piesdb.getimie() + " zostal usuniety.");
+        System.out.println("****** KONIEC TESTU DELETE ******\n");
+    }
+
+    @Test
+    public void checkDelPiesFromRasa(){
+
+        dane.clearPies();
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Pies pies = new Pies(IMIE_1,ROK_1,DIETA_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addPies(1,pies));
+
+        System.out.println("********** TEST DELETE **********\n");
+        List<Pies> AllPies = dane.getAllPies();
+        Pies piesdb = AllPies.get(dane.getAllPies().size());
+        assertEquals(1, dane.deletePiesFromRasa(piesdb.getrasa_id()));
+        System.out.println("Pies: " + piesdb.getimie() + " zostal usuniety");
+        System.out.println("****** KONIEC TESTU DELETE ******\n");
     }
 
 }
