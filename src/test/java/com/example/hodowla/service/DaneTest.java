@@ -99,4 +99,42 @@ public class DaneTest {
 
     }
 
+    @Test
+    public void checkDelAllPies(){
+
+        System.out.println("********** TEST USUWANIA **********\n");
+
+        dane.clearPies();
+
+        List<Pies> AllPies = dane.getAllPies();
+        int piesdb  = dane.getAllPies().size();
+
+        assertEquals(0,piesdb);
+
+        System.out.println("Usuwanie tabeli nastapilo pomyslnie.");
+
+        System.out.println("****** KONIEC TESTU USUWANIA ******\n");
+
+    }
+
+    @Test
+    public void checkDelAllRasa(){
+
+        System.out.println("********** TEST USUWANIA **********\n");
+
+        dane.clearRasa();
+
+        List<Rasa> AllRasa = dane.getAllRasa();
+        int rasadb  = dane.getAllRasa().size();
+
+        assertEquals(0,rasadb);
+
+        System.out.println("Usuwanie tabeli nastapilo pomyslnie.");
+
+        System.out.println("****** KONIEC TESTU USUWANIA ******\n");
+
+    }
+
+    
+
 }
