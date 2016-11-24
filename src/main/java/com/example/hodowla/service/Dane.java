@@ -143,9 +143,9 @@ public class Dane {
         int count = 0;
         try {
             addPiesStmt.setString(1, pies.getimie());
-            addPiesStmt.setint(2, pies.getrok());
+            addPiesStmt.setInt(2, pies.getrok());
             addPiesStmt.setString(3, pies.getdieta());
-            addPiesStmt.setint(4,id);
+            addPiesStmt.setInt(4,id);
 
             count = addPiesStmt.executeUpdate();
 
@@ -196,7 +196,7 @@ public class Dane {
         try {
             updateRasaStmt.setString(1,nazwa);
             updateRasaStmt.setString(2,opis);
-            updateRasaStmt.setint(3, rasa_id);
+            updateRasaStmt.setInt(3, rasa_id);
             updateRasaStmt.executeUpdate();
         }
         catch(SQLException e) {
@@ -207,10 +207,10 @@ public class Dane {
     public void updatePies(int pies_id, String imie, int rok, String dieta, int rasa_id){
         try {
             updatePiesStmt.setString(1,imie);
-            updatePiesStmt.setint(2,rok);
+            updatePiesStmt.setInt(2,rok);
             updatePiesStmt.setString(3, dieta);
-            updatePiesStmt.setint(4, rasa_id);
-            updatePiesStmt.setint(5,pies_id);
+            updatePiesStmt.setInt(4, rasa_id);
+            updatePiesStmt.setInt(5,pies_id);
             updatePiesStmt.executeUpdate();
         }
         catch(SQLException e) {
@@ -225,11 +225,11 @@ public class Dane {
 
             while (rsp.next()) {
                 Pies p = new Pies();
-                p.setpies_id(rsp.getint("id"));
+                p.setpies_id(rsp.getInt("id"));
                 p.setimie(rsp.getString("nazwa"));
                 p.setrok(rsp.getInt("rok_ur"));
                 p.setdieta(rsp.getString("dieta"));
-                p.setrasa_id(rsp.getint("rasa_id"));
+                p.setrasa_id(rsp.getInt("rasa_id"));
                 pies.add(p);
             }
 
@@ -268,11 +268,11 @@ public class Dane {
 
             while (rs.next()) {
                 Pies p = new Pies();
-                p.setpies_id(rs.getint("id"));
+                p.setpies_id(rs.getInt("id"));
                 p.setimie(rs.getString("nazwa"));
                 p.setrok(rs.getInt("rok_ur"));
                 p.setdieta(rs.getString("dieta"));
-                p.setrasa_id(rs.getint("rasa_id"));
+                p.setrasa_id(rs.getInt("rasa_id"));
                 pies.add(p);
             }
 
