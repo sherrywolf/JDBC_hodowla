@@ -5,7 +5,6 @@ public class Pies {
     private int pies_id;
     private String imie;
     private int rok;
-    private String plec;
     private String dieta;
     private int rasa_id;
 
@@ -13,13 +12,12 @@ public class Pies {
         super();
     }
 
-    public Pies(int pies_id, String imie, int rok, String plec, String dieta, int rasa_id) {
+    public Pies(int pies_id, String imie, int rok, String dieta, int rasa_id) {
         super();
 
         this.pies_id = pies_id;
         this.imie = imie;
         this.rok = rok;
-        this.plec = plec;
         this.dieta = dieta;
         this.rasa_id = rasa_id;
     }
@@ -46,14 +44,6 @@ public class Pies {
 
     public void setrok(int rok) {
         this.rok = rok;
-    }
-
-    public String getplec() {
-        return plec;
-    }
-
-    public void setplec(String plec) {
-        this.plec = plec;
     }
 
     public String getdieta() {
