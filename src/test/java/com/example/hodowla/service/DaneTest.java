@@ -52,7 +52,7 @@ public class DaneTest {
         System.out.println("Rasa " + rasa.getnazwa() + " zostala dodana do bazy.");
 
         List<Rasa> AllRasa = dane.getAllRasa();
-        Rasa rasadb = AllRasa.get(dane.getAllRasa().size());
+        Rasa rasadb = AllRasa.get(dane.getAllRasa().size()-1);
 
         assertEquals(NAME_1, rasadb.getnazwa());
         assertEquals(OPIS_1, rasadb.getopis());
@@ -62,7 +62,7 @@ public class DaneTest {
         System.out.println("Rasa " + rasa2.getnazwa() + " zostala dodana do bazy.");
 
         List<Rasa> AllRasa2 = dane.getAllRasa();
-        Rasa rasadb2 = AllRasa2.get(dane.getAllRasa().size());
+        Rasa rasadb2 = AllRasa2.get(dane.getAllRasa().size()-1);
 
         assertEquals(NAME_2, rasadb2.getnazwa());
         assertEquals(OPIS_2, rasadb2.getopis());
@@ -88,7 +88,7 @@ public class DaneTest {
         System.out.println("Pies " + pies.getimie() + " zostal dodany do bazy.");
 
         List<Pies> AllPies = dane.getAllPies();
-        Pies piesdb  = AllPies.get(dane.getAllPies().size());
+        Pies piesdb  = AllPies.get(dane.getAllPies().size()-1);
 
         assertEquals(IMIE_1, piesdb.getimie());
         assertEquals(ROK_1, piesdb.getrok());
@@ -182,6 +182,32 @@ public class DaneTest {
     }
 
     @Test
+    public void checkGetAllPies_idRasa(){
+
+        System.out.println("********** TEST SELECT **********\n");
+
+        dane.clearRasa();
+        dane.clearPies();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Rasa rasa2 = new Rasa(NAME_2,OPIS_2);
+        Pies pies = new Pies(IMIE_1,ROK_1,DIETA_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addRasa(rasa2));
+        assertEquals(1,dane.addPies(1,pies));
+
+        int db  = dane.getAllPies_idRasa(1).size();
+
+        assertEquals(1,db);
+
+        System.out.println("Select nastapil pomyslnie.");
+
+        System.out.println("****** KONIEC TESTU SELECT ******\n");
+
+    }
+
+    @Test
     public void checkDelRasa(){
 
         System.out.println("********** TEST DELETE **********\n");
@@ -217,7 +243,7 @@ public class DaneTest {
         assertEquals(1,dane.addPies(1,pies));
 
         List<Pies> AllPies = dane.getAllPies();
-        Pies piesdb = AllPies.get(dane.getAllPies().size());
+        Pies piesdb = AllPies.get(dane.getAllPies().size()-1);
         assertEquals(1, dane.deletePies(piesdb.getpies_id()));
         System.out.println("Pies o id: " + piesdb.getpies_id() + " i nazwie: " + piesdb.getimie() + " zostal usuniety.");
         System.out.println("****** KONIEC TESTU DELETE ******\n");
@@ -237,10 +263,76 @@ public class DaneTest {
 
         System.out.println("********** TEST DELETE **********\n");
         List<Pies> AllPies = dane.getAllPies();
-        Pies piesdb = AllPies.get(dane.getAllPies().size());
-        assertEquals(1, dane.deletePiesFromRasa(piesdb.getrasa_id()));
-        System.out.println("Pies: " + piesdb.getimie() + " zostal usuniety");
+        Pies piesdb = AllPies.get(dane.getAllPies().size()-1);
+
+        int c = dane.getAllPies_idRasa(piesdb.getrasa_id()).size();
+
+        assertEquals(c, dane.deletePiesFromRasa(piesdb.getrasa_id()));
+        System.out.println("Psy o rasa_id: " + piesdb.getrasa_id() + " zostaly usuniete" );
         System.out.println("****** KONIEC TESTU DELETE ******\n");
+    }
+
+    @Test
+    public void checkUpdatePies()
+    {
+        System.out.println("********** TEST UPDATE **********\n");
+
+        dane.clearPies();
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+        Rasa rasa2 = new Rasa(NAME_2,OPIS_2);
+        Pies pies = new Pies(IMIE_1,ROK_1,DIETA_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+        assertEquals(1,dane.addRasa(rasa2));
+        assertEquals(1,dane.addPies(1,pies));
+
+        List<Pies> AllPies = dane.getAllPies();
+        Pies piesdb = AllPies.get(dane.getAllPies().size()-1);
+
+        System.out.println("Pies przed update:  id(" + piesdb.getpies_id() + ") imie(" + piesdb.getimie() + ") rok_ur(" + piesdb.getrok()  + ") dieta(" + piesdb.getdieta() + ") rasa(" + piesdb.getrasa_id() + ")");
+
+        dane.updatePies(piesdb.getpies_id(),"Lili",piesdb.getrok(),piesdb.getdieta(),2);
+
+        AllPies = dane.getAllPies();
+        piesdb = AllPies.get(dane.getAllPies().size()-1);
+
+        System.out.println("Pies po update:  id(" + piesdb.getpies_id() + ") imie(" + piesdb.getimie() + ") rok_ur(" + piesdb.getrok()  + ") dieta(" + piesdb.getdieta() + ") rasa(" + piesdb.getrasa_id() + ")");
+
+        assertEquals("Lili", piesdb.getimie());
+        assertEquals(2, piesdb.getrasa_id());
+
+        System.out.println("****** KONIEC TESTU UPDATE ******\n");
+    }
+
+    @Test
+    public void checkUpdateRasa()
+    {
+        System.out.println("********** TEST UPDATE **********\n");
+
+        dane.clearPies();
+        dane.clearRasa();
+
+        Rasa rasa = new Rasa(NAME_1,OPIS_1);
+
+        assertEquals(1,dane.addRasa(rasa));
+
+        List<Rasa> AllRasa = dane.getAllRasa();
+        Rasa rasadb = AllRasa.get(dane.getAllRasa().size()-1);
+
+        System.out.println("Rasa przed update:  nazwa(" + rasadb.getnazwa() + ") opis(" + rasadb.getopis() + ") id(" + rasadb.getrasa_id()  + ")");
+
+        dane.updateRasa(rasadb.getrasa_id(),"DALMATYNCZYK",rasadb.getopis());
+
+        AllRasa = dane.getAllRasa();
+        rasadb = AllRasa.get(dane.getAllRasa().size()-1);
+
+        System.out.println("Rasa po update:  nazwa(" + rasadb.getnazwa() + ") opis(" + rasadb.getopis() + ") id(" + rasadb.getrasa_id()  + ")");
+
+        assertEquals("DALMATYNCZYK", rasadb.getnazwa());
+
+        System.out.println("****** KONIEC TESTU UPDATE ******\n");
     }
 
 }
